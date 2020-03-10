@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        max-width: 700px;
+        margin: 50px auto;
+        background: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <demo-element></demo-element>
+
+    <script type="module">
+      import { LitElement, html } from 'lit-element';
+      import '../lit-weather.js';
+
+      class DemoElement extends LitElement {
+        render() {
+          return html`
+            <style>
+              lit-weather {
+                padding: 20px 16px 24px 16px;
+                border: 1px solid #dfe1e5;
+                border-radius: 8px;
+              }
+
+              input {
+                margin-bottom: 50px;
+              }
+            </style>
+
+            <input
+              .value="${this.value}"
+              @change="${e => {
+                this.value = e.srcElement.value;
+              }}"
+            />
+            <button @click="${this.refresh}">Refresh</button>
+
+            <lit-weather
+              .query="${this.value}"
+              .apiKey=${`dbb6d88373f5de18206bd0c7c4249bed`}
+            ></lit-weather>
+          `;
+        }
+
+        static get properties() {
+          return {
+            value: { type: String },
+            value2: { type: String },
+          };
+        }
+
+        constructor() {
+          super();
+          this.value = 'Santa Barbara';
+        }
+
+        refresh() {
+          this.shadowRoot.querySelector('lit-weather').refresh();
+        }
+      }
+
+      customElements.define('demo-element', DemoElement);
+    </script>
+  </body>
+</html>

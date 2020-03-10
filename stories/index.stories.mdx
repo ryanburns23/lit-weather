@@ -1,0 +1,55 @@
+import { Story, Preview, Meta, Props, html } from '@open-wc/demoing-storybook';
+
+import '../lit-weather.js';
+
+<Meta 
+  title="LitWeather"
+  parameters={{
+    component: "lit-weather",
+    options: { selectedPanel: "storybookjs/knobs/panel" }
+  }}
+/>
+
+# LitWeather
+
+A component for...
+
+## Features:
+
+- a
+- b
+- ...
+
+## How to use
+
+### Installation
+
+```bash
+yarn add lit-weather
+```
+
+```js
+import 'lit-weather/lit-weather.js';
+```
+
+<Preview withToolbar>
+  <Story name="Simple">
+    {html`
+      <lit-weather></lit-weather>
+    `}
+  </Story>
+</Preview>
+
+## API
+
+<Props of="lit-weather" />
+
+## Variations
+
+###### Custom Title
+
+<Story name="Custom Title">
+  {html`
+    <lit-weather .title=${'Hello World'}></lit-weather>
+  `}
+</Story>
