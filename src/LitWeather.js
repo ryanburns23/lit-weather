@@ -379,7 +379,8 @@ export class LitWeather extends LitElement {
   // eslint-disable-next-line class-methods-use-this
   _getLocationParam(query) {
     // eslint-disable-next-line no-restricted-globals
-    const isZipCode = !isNaN(query.charAt(0) - parseFloat(query.charAt(0)));
+    const firstChar = query.toString().charAt(0);
+    const isZipCode = !isNaN(firstChar - parseFloat(firstChar));
     return isZipCode ? `zip=${query}` : `q=${query}`;
   }
 
@@ -408,6 +409,7 @@ export class LitWeather extends LitElement {
           }),
           fullForecastUrl: `https://openweathermap.org/city/${data.id}`,
         };
+        this.dispatchEvent(new CustomEvent('data-changed', { detail: { value: this.data } }));
       })
       .catch(error => {
         this._handleWeatherError(error);

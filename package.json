@@ -1,6 +1,6 @@
 {
   "name": "lit-weather",
-  "version": "0.0.1",
+  "version": "1.0.0-alpha.2",
   "description": "lit-weather is a web component using lit-html to display current weather and a forecast with the openWeather apis",
   "author": "lit-weather",
   "license": "MIT",
