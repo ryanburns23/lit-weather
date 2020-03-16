@@ -12,20 +12,18 @@ import '../lit-weather.js';
 
 # LitWeather
 
-A component for...
+A web component using lit-html to display current weather and a forecast with the openWeather apis
 
 ## Features:
 
-- a
-- b
-- ...
+- Display current weather and forecast for any city using the open weather APIs
 
 ## How to use
 
 ### Installation
 
 ```bash
-yarn add lit-weather
+npm i lit-weather
 ```
 
 ```js
@@ -35,7 +33,10 @@ import 'lit-weather/lit-weather.js';
 <Preview withToolbar>
   <Story name="Simple">
     {html`
-      <lit-weather></lit-weather>
+      <lit-weather 
+        .apiKey="${'dbb6d88373f5de18206bd0c7c4249bed'}" 
+        .query="${'93108'}">
+      </lit-weather>
     `}
   </Story>
 </Preview>
@@ -43,13 +44,3 @@ import 'lit-weather/lit-weather.js';
 ## API
 
 <Props of="lit-weather" />
-
-## Variations
-
-###### Custom Title
-
-<Story name="Custom Title">
-  {html`
-    <lit-weather .title=${'Hello World'}></lit-weather>
-  `}
-</Story>

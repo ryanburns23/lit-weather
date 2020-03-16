@@ -1,30 +1,147 @@
 {
-  "version": 2,
+  "version": "experimental",
   "tags": [
     {
       "name": "lit-weather",
-      "description": "A component with a title and an action counter",
-      "properties": [
+      "path": "./lit-weather.js",
+      "attributes": [
         {
-          "name": "title",
-          "type": "String",
-          "description": "The title of your component",
-          "default": "Hey there"
+          "name": "apiKey",
+          "type": "string"
         },
         {
-          "name": "counter",
-          "type": "Number",
-          "description": "An action counter",
-          "default": 0
+          "name": "query",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "data",
+          "type": "object",
+          "default": "{}"
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "units",
+          "type": "string",
+          "default": "\"Imperial\""
+        },
+        {
+          "name": "weekDayName",
+          "type": "string"
+        },
+        {
+          "name": "time",
+          "type": "string"
+        },
+        {
+          "name": "useOpenWeatherIcons",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "forecast",
+          "type": "array",
+          "default": "[]"
+        },
+        {
+          "name": "iconBaseUrl",
+          "type": "string",
+          "default": "\"/icons\""
+        },
+        {
+          "name": "error",
+          "type": "boolean",
+          "default": "false"
         }
       ],
-      "events": [],
-      "slots": [],
-      "cssProperties": [
+      "properties": [
         {
-          "name": "--lit-weather-text-color",
-          "description": "Main Text Color",
-          "type": "Color"
+          "name": "pageContent",
+          "type": "TemplateResult"
+        },
+        {
+          "name": "content",
+          "type": "TemplateResult"
+        },
+        {
+          "name": "loadingTm",
+          "type": "TemplateResult"
+        },
+        {
+          "name": "errorTm",
+          "type": "TemplateResult"
+        },
+        {
+          "name": "apiKey",
+          "attribute": "apiKey",
+          "type": "string"
+        },
+        {
+          "name": "query",
+          "attribute": "query",
+          "type": "string",
+          "default": "\"\""
+        },
+        {
+          "name": "data",
+          "attribute": "data",
+          "type": "object",
+          "default": "{}"
+        },
+        {
+          "name": "loading",
+          "attribute": "loading",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "units",
+          "attribute": "units",
+          "type": "string",
+          "default": "\"Imperial\""
+        },
+        {
+          "name": "weekDayName",
+          "attribute": "weekDayName",
+          "type": "string"
+        },
+        {
+          "name": "time",
+          "attribute": "time",
+          "type": "string"
+        },
+        {
+          "name": "useOpenWeatherIcons",
+          "attribute": "useOpenWeatherIcons",
+          "type": "boolean",
+          "default": "false"
+        },
+        {
+          "name": "forecast",
+          "attribute": "forecast",
+          "type": "array",
+          "default": "[]"
+        },
+        {
+          "name": "iconBaseUrl",
+          "attribute": "iconBaseUrl",
+          "type": "string",
+          "default": "\"/icons\""
+        },
+        {
+          "name": "error",
+          "attribute": "error",
+          "type": "boolean",
+          "default": "false"
+        }
+      ],
+      "events": [
+        {
+          "name": "data-changed"
         }
       ]
     }
