@@ -28,8 +28,8 @@
   <!-- This demo file is not meant to be analyzed for code structure, it is just a bunch of HTML, read the source file if you need more insight  -->
   <!-- This is all that gets pushed to vercel -->
   <script type="module">
-    import { LitElement, html } from 'lit';
-    import '../lit-weather';
+    import { LitElement, html } from '../node_modules/lit/index.js';
+    import '../dist/lit-weather.js';
 
     const defaultTabClassName = /*tw*/ 'rounded-md px-3 py-2 text-sm font-medium';
     const activeTabClassName =
