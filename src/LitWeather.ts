@@ -173,14 +173,6 @@ export class LitWeather extends LitElement {
     return html` <div class=${this.cn.wrapper}>${this.Header}${this.Forecast}</div> `;
   }
 
-  get LoadingContent() {
-    return html`
-      <div class="${this.cn.loading}">
-        <div>• • •</div>
-      </div>
-    `;
-  }
-
   get ErrorContent() {
     return html` <div class="flex justify-center">Error loading weather data</div> `;
   }
@@ -252,7 +244,6 @@ export class LitWeather extends LitElement {
   }
 
   updated(changed: Map<string, any>) {
-    console.log(changed.has('units'));
     if (changed.has('token') || changed.has('query') || changed.has('units')) {
       this._generateRequests(this.token, this.query);
     }
@@ -263,7 +254,6 @@ export class LitWeather extends LitElement {
 
   toggleUnits() {
     this.units = this.units === 'Imperial' ? 'Metric' : 'Imperial';
-    console.log('toggled', this.units);
     this.refresh();
   }
 
@@ -302,7 +292,6 @@ export class LitWeather extends LitElement {
         this.time = getLocalTime(new Date(data.dt * 1000));
         this.weekDayName = getWeekDay(new Date(data.dt * 1000 + data.timezone * 1000).getDay());
 
-        console.log(this.weekDayName);
         this.data = {
           id: data.id,
           name: data.name,
@@ -320,7 +309,6 @@ export class LitWeather extends LitElement {
           }),
           fullForecastUrl: `https://openweathermap.org/city/${data.id}`,
         };
-        console.log(data);
         this.dispatchEvent(new CustomEvent('data-changed', { detail: { value: this.data } }));
         this.requestUpdate();
       })
@@ -365,7 +353,6 @@ export class LitWeather extends LitElement {
       const forecastDate = new Date(item.dt_txt);
       // Create a key to represent the forecast date (month and day)
       const forecastDateKey = `${forecastDate.getMonth() + 1}-${forecastDate.getDate()}`;
-      console.log(forecastDateKey);
       // Get the forecast data for the day (if it already exists)
       const day = data[forecastDateKey] || {};
       // Get the high and low temperatures for the day
@@ -406,7 +393,7 @@ export class LitWeather extends LitElement {
 
     // Remove the last day (as it is inaccurate)
     // response.pop();
-    console.log(response);
+
     return response;
   }
 
