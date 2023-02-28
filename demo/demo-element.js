@@ -105,7 +105,7 @@ class DemoElement extends LitElement {
           token="1e366c8dec8ecdfd589dd13d8aa454e2"
         ></lit-weather>
 
-        <div class="mt-28">
+        <div class="mt-24">
           <h2 class="text-3xl mb-5">Properties</h2>
           <div class="my-6">
             <ul
@@ -183,6 +183,12 @@ class DemoElement extends LitElement {
                 : html`<p>Loading...</p>`}
             </ul>
           </div>
+        </div>
+
+        <div class="mt-16 block text-xs text-gray-500">
+          <a target="_blank" href="https://codepen.io/ryanburns23/pen/vYzgVLE">
+            Edit on CodePen &rarr;
+          </a>
         </div>
       </div>
     `;
