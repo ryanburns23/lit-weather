@@ -1,61 +1,49 @@
 {
   "name": "lit-weather",
-  "version": "1.0.0-alpha.2",
-  "description": "lit-weather is a web component using lit-html to display current weather and a forecast with the openWeather apis",
-  "author": "lit-weather",
+  "version": "1.0.0",
+  "description": "Lit powered weather forecast web component, leveraging the OpenWeatherMap API. It's customizable with tailwindcss, lightweight, and shadow dom free.",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "author": "ryanburns23",
   "license": "MIT",
-  "main": "index.js",
-  "module": "index.js",
   "scripts": {
-    "start": "es-dev-server --app-index demo/index.html --node-resolve --open --watch",
+    "start": "web-dev-server --open demo/ --node-resolve",
+    "start:watch": "web-dev-server --open demo/ --node-resolve --watch",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "format": "npm run format:eslint && npm run format:prettier",
     "lint:eslint": "eslint --ext .js,.html . --ignore-path .gitignore",
     "format:eslint": "eslint --ext .js,.html . --fix --ignore-path .gitignore",
     "lint:prettier": "prettier \"**/*.js\" --check --ignore-path .gitignore",
     "format:prettier": "prettier \"**/*.js\" --write --ignore-path .gitignore",
-    "lint": "npm run lint:eslint && npm run lint:prettier",
-    "format": "npm run format:eslint && npm run format:prettier",
-    "test": "karma start --coverage",
-    "test:watch": "karma start --auto-watch=true --single-run=false",
-    "test:update-snapshots": "karma start --update-snapshots",
-    "test:prune-snapshots": "karma start --prune-snapshots",
-    "test:bs": "karma start karma.bs.config.js --coverage",
-    "storybook": "start-storybook --node-resolve --watch --open",
-    "storybook:build": "build-storybook"
+    "tw:watch": "cd demo && npx tailwindcss -i ./tw.css -o ./tw-output.css --watch",
+    "tw:build": "npx tailwindcss -i ./demo/tw.css -o ./dist/tw.css",
+    "build": "tsc && npm run tw:build",
+    "build:watch": "tsc --watch"
   },
   "dependencies": {
-    "lit-html": "^1.1.2",
-    "lit-element": "^2.2.1"
+    "lit": "^2.6.1"
   },
   "devDependencies": {
-    "@open-wc/demoing-storybook": "^1.13.5",
-    "@open-wc/eslint-config": "^2.0.4",
-    "@open-wc/prettier-config": "^0.1.10",
-    "@open-wc/testing": "^2.5.6",
-    "@open-wc/testing-karma": "^3.3.7",
-    "@open-wc/testing-karma-bs": "^1.3.51",
-    "deepmerge": "^3.2.0",
-    "es-dev-server": "^1.45.1",
-    "eslint": "^6.1.0",
-    "husky": "^1.0.0",
-    "lint-staged": "^8.0.0"
+    "@open-wc/eslint-config": "^9.2.2",
+    "@types/node": "18.14.2",
+    "@web/dev-server": "^0.1.35",
+    "@web/dev-server-esbuild": "0.3.3",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.6.0",
+    "prettier": "^2.8.4",
+    "tailwindcss": "^3.2.7",
+    "tslib": "2.5.0",
+    "typescript": "4.9.5"
   },
   "eslintConfig": {
     "extends": [
-      "@open-wc/eslint-config",
-      "eslint-config-prettier"
+      "@open-wc/eslint-config"
     ]
   },
-  "prettier": "@open-wc/prettier-config",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ]
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "printWidth": 100
   }
 }
