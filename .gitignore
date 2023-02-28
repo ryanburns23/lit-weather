@@ -19,4 +19,5 @@
 /_site/
 /dist/
 
-./demo/tw-output.css
+/demo/tw-output.css
+/demo/custom-elements.json

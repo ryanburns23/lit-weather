@@ -1,12 +1,20 @@
 {
   "name": "lit-weather",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.0",
   "description": "Lit powered weather forecast web component, leveraging the OpenWeatherMap API. It's customizable with tailwindcss, lightweight, and shadow dom free.",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "author": "ryanburns23",
   "license": "MIT",
+  "customElements": "./custom-elements.json",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./customElements": "./custom-elements.json"
+  },
   "scripts": {
     "start": "web-dev-server --open demo/ --node-resolve",
     "start:watch": "web-dev-server --open demo/ --node-resolve --watch",
@@ -16,12 +24,13 @@
     "format:eslint": "eslint --ext .js,.html . --fix --ignore-path .gitignore",
     "lint:prettier": "prettier \"**/*.js\" --check --ignore-path .gitignore",
     "format:prettier": "prettier \"**/*.js\" --write --ignore-path .gitignore",
-    "tw:watch": "cd demo && npx tailwindcss -i ./tw.css -o ./tw-output.css --watch",
+    "tw:watch": "cd demo && npx tailwindcss --config ./tailwind.config.cjs -i ./tw.css -o ./tw-output.css --watch",
     "tw:build": "npx tailwindcss -i ./demo/tw.css -o ./dist/tw.css",
-    "build:demo": "./node_modules/.bin/esbuild ./demo/demo-element.js --bundle --outfile=./demo/demo-element.js --allow-overwrite",
-    "build": "tsc && npm run tw:build && npm run build:demo",
+    "build:demo": "./node_modules/.bin/esbuild ./demo/demo-element.js --bundle --outfile=./demo/demo-element.js --allow-overwrite && cpy 'custom-elements.json' demo",
+    "build": "tsc && npm run tw:build && npm run build:demo && npm run analyze",
     "build:tsc": "tsc",
-    "build:watch": "tsc --watch"
+    "build:watch": "tsc --watch",
+    "analyze": "npx @custom-elements-manifest/analyzer analyze --globs \"./src/LitWeather.ts\""
   },
   "dependencies": {
     "lit": "^2.6.1"
@@ -31,6 +40,7 @@
     "@types/node": "18.14.2",
     "@web/dev-server": "^0.1.35",
     "@web/dev-server-esbuild": "0.3.3",
+    "cpy-cli": "^4.2.0",
     "esbuild": "^0.17.10",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.6.0",

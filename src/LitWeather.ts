@@ -2,31 +2,40 @@ import { LitElement, css, html } from 'lit';
 import { property } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 
-const today = new Date();
-const getLocalTime = time =>
-  time.toLocaleString('en-US', {
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-  });
-const getWeekDay = index =>
-  ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][index];
-
-const secondaryTextColorClasses = /*tw*/ 'text-gray-500 dark:text-gray-400';
-
-const bg = {
-  50: 'bg-gray-50 dark:bg-gray-900',
+type Data = {
+  name?: string;
+  id?: number;
+  sunrise?: string;
+  sunset?: string;
+  temp?: number;
+  description?: string;
+  humidity?: string;
+  wind?: string;
+  weatherImgSrc?: string;
+  fullForecastUrl?: string;
+  tempFeelsLike?: number;
 };
 
-const skeletonLg = /*tw*/ html`<div
-  class="h-5 w-48 bg-gray-50 dark:bg-gray-900 rounded-lg mb-3"
-></div>`;
-const skeleton = /*tw*/ html`<div
-  class="h-4 w-20 bg-gray-50 dark:bg-gray-900 rounded-lg mb-2"
-></div>`;
-const skeletonSm = /*tw*/ html`<div
-  class="h-3 w-8 bg-gray-50 dark:bg-gray-900 rounded-lg mb-1"
-></div>`;
+type Forecast = {
+  weekDayName: string;
+  high: number;
+  low: number;
+  weatherImgSrc: string;
+}[];
+
+const today = new Date();
+// prettier-ignore
+const getLocalTime = time => time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+// prettier-ignore
+const getWeekDay = index => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][index];
+const secondaryTextColorClasses = /*tw*/ 'text-gray-500 dark:text-gray-400';
+// prettier-ignore
+const skeletonLg = /*tw*/ html`<div class="h-5 w-48 bg-gray-50 dark:bg-gray-900 rounded-lg mb-3"></div>`;
+// prettier-ignore
+const skeleton = /*tw*/ html`<div class="h-4 w-20 bg-gray-50 dark:bg-gray-900 rounded-lg mb-2"></div>`;
+// prettier-ignore
+const skeletonSm = /*tw*/ html`<div class="h-3 w-8 bg-gray-50 dark:bg-gray-900 rounded-lg mb-1"></div>`;
+
 const classNames = /*tw*/ {
   wrapper: 'block',
   'location-wrapper': '',
@@ -76,7 +85,7 @@ export class LitWeather extends LitElement {
                 width="70"
               />`
             : html`<div
-                class=${`${this.cn['img']} h-[70px] w-[70px] ${bg['50']} rounded-xl`}
+                class=${`${this.cn['img']} h-[70px] w-[70px] bg-gray-50 dark:bg-gray-900 rounded-xl`}
               ></div>`}
 
           <div class="${this.cn['img-temp-wrapper']}">
@@ -177,56 +186,39 @@ export class LitWeather extends LitElement {
     return html` <div class="flex justify-center">Error loading weather data</div> `;
   }
 
-  /** API response for the current weather  */
-  @property({ type: Object }) data: {
-    name?: string;
-    id?: number;
-    sunrise?: string;
-    sunset?: string;
-    temp?: number;
-    description?: string;
-    humidity?: string;
-    wind?: string;
-    weatherImgSrc?: string;
-    fullForecastUrl?: string;
-    tempFeelsLike?: number;
-  } = {};
-  /** Class names applied to elements  */
-  @property({ type: Object }) cn = classNames;
-  /** Your openweather API token */
-  @property({ type: String }) token = '';
-  /** Self host the icons */
-  @property({ type: String }) iconBaseUrl: string = 'https://www.unpkg.com/lit-weather/icons/';
   /**
-   * The query to lookup via openweatherapi
-   * {city name}
-   * {city name}, {state}
-   * {city name}, {state}, {country code}
-   * {zip code}
-   * {zip code},{country code}
+   * The query to lookup via openweatherapi. <br/>
+   * <code>{city}</code>  <br/>
+   * <code>{city}, {state}</code> <br/>
+   * <code>{city}, {state}, {country}</code> <br/>
+   * <code>{zip code}</code> <br/>
+   * <code>{zip code},{country code}</code>
    * */
   @property({ type: String }) query = '';
-  /** Whether or not to show the loading spinner */
-  @property({ type: Boolean }) loading = true;
+  /** Your openweather API token */
+  @property({ type: String }) token = '';
   /** The units to use for the weather */
   @property({ type: String }) units: 'Imperial' | 'Metric' = 'Imperial';
-  /** The variant for pre-defined tw classes */
+  /** Variant for pre-defined tw classes */
   @property({ type: String }) variant: 'stacked' | 'horizontal' = 'stacked';
+  /** Class names applied to elements  */
+  @property({ type: Object }) cn = classNames;
+  /** Icon type, defaults to a combination of material weather icons and openweather icons */
+  @property({ type: Boolean }) icons: 'default' | 'openweather' = 'default';
+  /** If you are self-hosting the iconset */
+  @property({ type: String }) iconBaseUrl: string = 'https://www.unpkg.com/lit-weather/icons/';
+  /** When true, a request is being made and the skeleton state is shown */
+  @property({ type: Boolean }) loading = true;
+  /** true when there is an error */
+  @property({ type: Boolean }) error = false;
   /** The day of the week */
   @property({ type: String }) weekDayName: string = getWeekDay(today.getDay());
   /** The current time */
   @property({ type: String }) time: string = getLocalTime(today);
-  /** Whether or not to use the openweather icons */
-  @property({ type: Boolean }) icons: 'default' | 'openweather' = 'default';
   /** The forecast data */
-  @property({ type: Boolean }) forecast: {
-    weekDayName: string;
-    high: number;
-    low: number;
-    weatherImgSrc: string;
-  }[] = [];
-  /** Whether or not there was an error */
-  @property({ type: Boolean }) error = false;
+  @property({ type: Boolean }) forecast: Forecast = [];
+  /** API response for the current weather  */
+  @property({ type: Object }) data: Data = {};
 
   firstUpdated() {
     if (!this.token || !this.query) return;
