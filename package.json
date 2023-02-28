@@ -18,7 +18,9 @@
     "format:prettier": "prettier \"**/*.js\" --write --ignore-path .gitignore",
     "tw:watch": "cd demo && npx tailwindcss -i ./tw.css -o ./tw-output.css --watch",
     "tw:build": "npx tailwindcss -i ./demo/tw.css -o ./dist/tw.css",
-    "build": "tsc && npm run tw:build",
+    "build:demo": "./node_modules/.bin/esbuild ./demo/demo-element.js --bundle --outfile=./demo/demo-element.js --allow-overwrite",
+    "build": "tsc && npm run tw:build && npm run build:demo",
+    "build:tsc": "tsc",
     "build:watch": "tsc --watch"
   },
   "dependencies": {
@@ -29,6 +31,7 @@
     "@types/node": "18.14.2",
     "@web/dev-server": "^0.1.35",
     "@web/dev-server-esbuild": "0.3.3",
+    "esbuild": "^0.17.10",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.6.0",
     "prettier": "^2.8.4",
