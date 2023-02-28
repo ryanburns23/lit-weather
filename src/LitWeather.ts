@@ -236,7 +236,7 @@ export class LitWeather extends LitElement {
   /** Whether or not there was an error */
   @property({ type: Boolean }) error = false;
 
-  firstUpdated(changed: Map<string, any>) {
+  firstUpdated() {
     if (!this.token || !this.query) return;
 
     // When the variant is not the default stacked, we need to add the tw classes

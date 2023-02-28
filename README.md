@@ -1,4 +1,4 @@
-# <lit-weather>
+# lit-weather
 
 Lit powered weather forecast web component, leveraging the OpenWeatherMap API. It's customizable with tailwindcss, lightweight, and shadow dom free. Replaces [paper-weather](https://github.com/ryanburns23/paper-weather)
 
