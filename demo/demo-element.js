@@ -127,6 +127,7 @@ class DemoElement extends LitElement {
                                 <dt class="sr-only">Type</dt>
                                 <dd class="font-mono text-xs text-zinc-400 dark:text-zinc-500">
                                   ${p.type.text}
+                                  ${['query', 'token'].includes(p.name) ? ' | required' : ''}
                                 </dd>
                               `
                             : ''}
