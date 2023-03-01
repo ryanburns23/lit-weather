@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.0-beta.3] - 2023-03-01
+
+- Add "./lit-weather" to package.json exports
+- Add `.js` extension to import in `./lit-weather.ts`
+- Add bg color to img element
+
 ## [1.0.0-beta.2] - 2023-03-01
 
 - Add global JSX.IntrinsicElements def for react

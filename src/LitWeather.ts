@@ -46,7 +46,7 @@ const classNames = /*tw*/ {
   'temp-wrapper-desktop': 'flex flex-col-reverse',
   'temp-wrapper': 'flex horizontal',
   'img-temp-wrapper': 'flex',
-  img: 'h-[70px] w-[70px] mr-3',
+  img: 'h-[70px] w-[70px] mr-3 bg-gray-50 dark:bg-gray-900 rounded',
   'unit-toggle': `text-lg mt-1.5 ml-2 ${secondaryTextColorClasses}`,
   'unit-toggle-active': `text-black dark:text-white`,
   temp: 'text-7xl',
