@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.0-beta.4] - 2023-03-01
+
+- Change bg-color on img components to `bg-inherit`
+
 ## [1.0.0-beta.3] - 2023-03-01
 
 - Add "./lit-weather" to package.json exports
