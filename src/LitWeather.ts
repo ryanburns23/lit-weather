@@ -198,27 +198,27 @@ export class LitWeather extends LitElement {
   /** Your openweather API token */
   @property({ type: String }) token = '';
   /** The units to use for the weather */
-  @property({ type: String }) units: 'Imperial' | 'Metric' = 'Imperial';
+  @property({ type: String }) units?: 'Imperial' | 'Metric' = 'Imperial';
   /** Variant for pre-defined tw classes */
-  @property({ type: String }) variant: 'stacked' | 'horizontal' = 'stacked';
+  @property({ type: String }) variant?: 'stacked' | 'horizontal' = 'stacked';
   /** Class names applied to elements  */
-  @property({ type: Object }) cn = classNames;
+  @property({ type: Object }) cn?: typeof classNames = classNames;
   /** Icon type, defaults to a combination of material weather icons and openweather icons */
-  @property({ type: Boolean }) icons: 'default' | 'openweather' = 'default';
+  @property({ type: Boolean }) icons?: 'default' | 'openweather' = 'default';
   /** If you are self-hosting the iconset */
-  @property({ type: String }) iconBaseUrl: string = 'https://www.unpkg.com/lit-weather/icons/';
+  @property({ type: String }) iconBaseUrl?: string = 'https://www.unpkg.com/lit-weather/icons/';
   /** When true, a request is being made and the skeleton state is shown */
-  @property({ type: Boolean }) loading = true;
+  @property({ type: Boolean }) loading?: boolean = true;
   /** true when there is an error */
-  @property({ type: Boolean }) error = false;
+  @property({ type: Boolean }) error?: boolean = false;
   /** The day of the week */
-  @property({ type: String }) weekDayName: string = getWeekDay(today.getDay());
+  @property({ type: String }) weekDayName?: string = getWeekDay(today.getDay());
   /** The current time */
-  @property({ type: String }) time: string = getLocalTime(today);
+  @property({ type: String }) time?: string = getLocalTime(today);
   /** The forecast data */
-  @property({ type: Boolean }) forecast: Forecast = [];
+  @property({ type: Boolean }) forecast?: Forecast = [];
   /** API response for the current weather  */
-  @property({ type: Object }) data: Data = {};
+  @property({ type: Object }) data?: Data = {};
 
   firstUpdated() {
     if (!this.token || !this.query) return;
@@ -435,8 +435,31 @@ export class LitWeather extends LitElement {
   }
 }
 
+// These types help TypeScript understand the types of the properties and events when this component is used in other frameworks
 declare global {
   interface HTMLElementTagNameMap {
     'lit-weather': LitWeather;
+  }
+  // https://coryrylan.com/blog/how-to-use-web-components-with-typescript-and-react
+  namespace JSX {
+    interface IntrinsicElements {
+      ['lit-weather']: Partial<LitWeather> &
+        Pick<
+          LitWeather,
+          | 'query'
+          | 'token'
+          | 'units'
+          | 'variant'
+          | 'cn'
+          | 'icons'
+          | 'iconBaseUrl'
+          | 'loading'
+          | 'error'
+          | 'weekDayName'
+          | 'time'
+          | 'forecast'
+          | 'data'
+        >;
+    }
   }
 }

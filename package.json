@@ -1,6 +1,6 @@
 {
   "name": "lit-weather",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Lit powered weather forecast web component, leveraging the OpenWeatherMap API. It's customizable with tailwindcss, lightweight, and shadow dom free.",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,7 +12,8 @@
     "README.md",
     "dist",
     "demo/assets",
-    "icons"
+    "icons",
+    "custom-elements.json"
   ],
   "exports": {
     ".": {

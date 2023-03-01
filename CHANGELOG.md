@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.0-beta.2] - 2023-03-01
+
+- Add global JSX.IntrinsicElements def for react
+- Include custom-elements.json in package.json files array
+- Mark optional properties as optional in typescript
+
 ## [1.0.0-beta.1] - 2023-02-28
 
 - Add icons to package.json files array
