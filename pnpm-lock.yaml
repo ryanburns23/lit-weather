@@ -1,7 +1,6 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@types/eslint': ^8.21.1
   '@types/node': 18.14.2
   '@typescript-eslint/eslint-plugin': ^5.54.0
   '@typescript-eslint/parser': ^5.54.0
@@ -21,7 +20,6 @@ dependencies:
   lit: 2.6.1
 
 devDependencies:
-  '@types/eslint': 8.21.1
   '@types/node': 18.14.2
   '@typescript-eslint/eslint-plugin': 5.54.0_6mj2wypvdnknez7kws2nfdgupi
   '@typescript-eslint/parser': 5.54.0_ycpbpc6yetojsgtrx3mwntkhsu
@@ -404,13 +402,6 @@ packages:
       '@types/express': 4.17.17
       '@types/keygrip': 1.0.2
       '@types/node': 18.14.2
-    dev: true
-
-  /@types/eslint/8.21.1:
-    resolution: {integrity: sha512-rc9K8ZpVjNcLs8Fp0dkozd5Pt2Apk1glO4Vgz8ix1u6yFByxfqo5Yavpy65o+93TAe24jr7v+eSBtFLvOQtCRQ==}
-    dependencies:
-      '@types/estree': 0.0.39
-      '@types/json-schema': 7.0.11
     dev: true
 
   /@types/estree/0.0.39:
