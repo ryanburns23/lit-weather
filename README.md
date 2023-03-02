@@ -18,11 +18,18 @@ import 'lit-weather';
 <lit-weather api-key="API_KEY" query="ZIP_CODE_OR_CITY" />;
 ```
 
-```html
-<script type="module" src="lit-weather.js" />
+## Getting an API Key
 
-<lit-weather api-key="API_KEY" query="ZIP_CODE_OR_CITY" />;
-```
+To use the lit-weather component, you will need an API key from OpenWeatherMap. You can get one [here](https://home.openweathermap.org/api_keys). Afrer you request a key, it take a few minutes to be approved.
+
+Free tier limits are:
+
+- 60 calls/minute
+- 1,000,000 calls/month
+
+I left a key exposed in the demo but it is not guaranteed to work.I don't know if they enfore these limits as I have not reached them but have definitely made more than 60 calls/minute. 😄
+
+The component calls both the ["current weather"](https://openweathermap.org/current) and ["3-hour forecast 5 days"](https://openweathermap.org/forecast5) endpoints.
 
 ## Styles
 
@@ -45,6 +52,10 @@ module.exports = {
 ## Frameworks
 
 This should work in any framework that supports web components. If you have any issues, please open an issue.
+
+## Roadmap
+
+- Add more providers ([open-meteo](https://open-meteo.com/), [weatherbit](https://www.weatherbit.io/))
 
 ## Aknowledgements
 
