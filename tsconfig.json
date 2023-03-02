@@ -5,7 +5,7 @@
     "declaration": true,
     "moduleResolution": "node",
     "lib": ["es2017", "dom"],
-    "strict": false,
+    "strict": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,

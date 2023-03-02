@@ -1,6 +1,6 @@
 {
   "name": "lit-weather",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0",
   "description": "Lit powered weather forecast web component, leveraging the OpenWeatherMap API. It's customizable with tailwindcss, lightweight, and shadow dom free.",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -29,12 +29,7 @@
   "scripts": {
     "start": "web-dev-server --open demo/ --node-resolve",
     "start:watch": "web-dev-server --open demo/ --node-resolve --watch",
-    "lint": "npm run lint:eslint && npm run lint:prettier",
-    "format": "npm run format:eslint && npm run format:prettier",
-    "lint:eslint": "eslint --ext .js,.html . --ignore-path .gitignore",
-    "format:eslint": "eslint --ext .js,.html . --fix --ignore-path .gitignore",
-    "lint:prettier": "prettier \"**/*.js\" --check --ignore-path .gitignore",
-    "format:prettier": "prettier \"**/*.js\" --write --ignore-path .gitignore",
+    "lint": "eslint --ext .ts . --ignore-path .gitignore",
     "tw:watch": "cd demo && npx tailwindcss --config ./tailwind.config.cjs -i ./tw.css -o ./tw-output.css --watch",
     "tw:build": "npx tailwindcss -i ./demo/tw.css -o ./dist/tw.css",
     "build:demo": "./node_modules/.bin/esbuild ./demo/demo-element.js --bundle --outfile=./demo/demo-element.js --allow-overwrite && cpy 'custom-elements.json' demo",
@@ -47,8 +42,9 @@
     "lit": "^2.6.1"
   },
   "devDependencies": {
-    "@open-wc/eslint-config": "^9.2.2",
     "@types/node": "18.14.2",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
     "@web/dev-server": "^0.1.35",
     "@web/dev-server-esbuild": "0.3.3",
     "cpy-cli": "^4.2.0",
@@ -62,11 +58,6 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "eslintConfig": {
-    "extends": [
-      "@open-wc/eslint-config"
-    ]
   },
   "prettier": {
     "singleQuote": true,
