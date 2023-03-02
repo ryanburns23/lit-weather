@@ -14,27 +14,38 @@
             {
               "kind": "method",
               "name": "createRenderRoot",
-              "privacy": "protected"
+              "privacy": "protected",
+              "description": "Disable shadow-dom"
             },
             {
               "kind": "method",
-              "name": "render"
+              "name": "render",
+              "privacy": "protected"
             },
             {
               "kind": "field",
-              "name": "Header"
+              "name": "Header",
+              "privacy": "protected"
             },
             {
               "kind": "field",
-              "name": "Forecast"
+              "name": "Forecast",
+              "privacy": "protected"
             },
             {
               "kind": "field",
-              "name": "Content"
+              "name": "Preview",
+              "privacy": "protected"
             },
             {
               "kind": "field",
-              "name": "ErrorContent"
+              "name": "Content",
+              "privacy": "protected"
+            },
+            {
+              "kind": "field",
+              "name": "ErrorContent",
+              "privacy": "protected"
             },
             {
               "kind": "field",
@@ -42,7 +53,6 @@
               "type": {
                 "text": "string"
               },
-              "default": "''",
               "description": "The query to lookup via openweatherapi. <br/>\n<code>{city}</code>  <br/>\n<code>{city}, {state}</code> <br/>\n<code>{city}, {state}, {country}</code> <br/>\n<code>{zip code}</code> <br/>\n<code>{zip code},{country code}</code>"
             },
             {
@@ -51,7 +61,6 @@
               "type": {
                 "text": "string"
               },
-              "default": "''",
               "description": "Your openweather API token"
             },
             {
@@ -60,26 +69,26 @@
               "type": {
                 "text": "'Imperial' | 'Metric' | undefined"
               },
-              "default": "'Imperial'",
-              "description": "The units to use for the weather"
+              "description": "The units to use for the weather",
+              "default": "'Imperial'"
             },
             {
               "kind": "field",
               "name": "variant",
               "type": {
-                "text": "'stacked' | 'horizontal' | undefined"
+                "text": "'stacked' | 'preview' | undefined"
               },
-              "default": "'stacked'",
-              "description": "Variant for pre-defined tw classes"
+              "description": "Variant for pre-defined tw classes",
+              "default": "'stacked'"
             },
             {
               "kind": "field",
               "name": "cn",
               "type": {
-                "text": "typeof classNames | undefined"
+                "text": "typeof defaultCn | undefined"
               },
-              "default": "{\n  wrapper: 'block',\n  'location-wrapper': '',\n  location: 'text-2xl font-medium',\n  today: `text-base ${secondaryTextColorClasses}`,\n  description: `text-sm mb-3 capitalize ${secondaryTextColorClasses}`,\n  time: `text-base mb-4 ${secondaryTextColorClasses}`,\n  'temp-wrapper-desktop': 'flex flex-col-reverse',\n  'temp-wrapper': 'flex horizontal',\n  'img-temp-wrapper': 'flex',\n  img: 'h-[70px] w-[70px] mr-3 bg-inherit rounded',\n  'unit-toggle': `text-lg mt-1.5 ml-2 ${secondaryTextColorClasses}`,\n  'unit-toggle-active': `text-black dark:text-white`,\n  temp: 'text-7xl',\n  'extra-info': `flex-col text-xs ml-6 mt-2 hidden sm:flex ${secondaryTextColorClasses}`,\n  'forecast-wrapper': 'flex flex-wrap gap-6 sm:gap-8 mt-4',\n  'forecast-item': 'flex flex-col items-center',\n  'forecast-item-title': `text-center text-sm font-medium mb-1 ${secondaryTextColorClasses}`,\n  'forecast-item-high': 'text-sm',\n  'forecast-item-low': `text-sm ${secondaryTextColorClasses}`,\n  'forecast-item-img': 'mb-1 bg-inherit',\n  'error-img': 'h-[120px] w-[120px] mb-4',\n  'error-text': 'text-2xl text-center',\n  'mobile-header': 'md:hidden',\n  loading: 'text-center',\n}",
-              "description": "Class names applied to elements"
+              "description": "Class names applied to elements",
+              "default": "{\n  wrapper: 'block',\n  location: 'text-2xl font-medium',\n  today: `text-base ${grayTxt}`,\n  description: `text-sm mb-3 capitalize ${grayTxt}`,\n  time: `text-base mb-4 ${grayTxt}`,\n  img: 'h-[70px] w-[70px] mr-3 bg-inherit rounded',\n  'img-loading': 'h-[70px] w-[70px] bg-gray-50 dark:bg-gray-800 mr-3 bg-inherit rounded',\n  'extra-info': `flex-col text-xs ml-6 mt-2 hidden sm:flex ${grayTxt}`,\n  'temp-wrapper': 'flex horizontal',\n  'temp-content': 'flex',\n  temp: 'text-7xl',\n  'unit-toggle': `text-lg mt-1.5 ml-2 ${grayTxt}`,\n  'unit-toggle-active': `text-black dark:text-white`,\n  'forecast-wrapper': 'flex flex-wrap gap-6 sm:gap-8 mt-4',\n  'forecast-item': 'flex flex-col items-center',\n  'forecast-item-title': `text-center text-sm font-medium mb-1 ${grayTxt}`,\n  'forecast-item-high': 'text-sm',\n  'forecast-item-low': `text-sm ${grayTxt}`,\n  'forecast-item-img': 'mb-1 bg-inherit',\n  'forecast-item-img-loading': 'h-[48px] w-[48px] rounded-lg bg-gray-50 dark:bg-gray-800',\n  error: 'text-sm',\n  'preview-wrapper': 'flex items-center',\n  'preview-img': 'h-6 w-6 mr-2 bg-inherit rounded',\n  'preview-img-loading': 'h-6 w-6 bg-gray-50 dark:bg-gray-800 rounded-xl',\n  'preview-temp': 'text-lg',\n  'preview-temp-content': 'flex',\n  'preview-unit-toggle': `text-xs mt-0.5 ml-1 ${grayTxt}`,\n}"
             },
             {
               "kind": "field",
@@ -87,7 +96,6 @@
               "type": {
                 "text": "'default' | 'openweather' | undefined"
               },
-              "default": "'default'",
               "description": "Icon type, defaults to a combination of material weather icons and openweather icons"
             },
             {
@@ -96,60 +104,76 @@
               "type": {
                 "text": "string | undefined"
               },
-              "default": "'https://www.unpkg.com/lit-weather/icons/'",
-              "description": "If you are self-hosting the iconset"
+              "description": "If you are self-hosting the iconset",
+              "default": "'https://www.unpkg.com/lit-weather/icons/'"
             },
             {
               "kind": "field",
-              "name": "loading",
+              "name": "_loading",
               "type": {
                 "text": "boolean | undefined"
               },
-              "default": "true",
-              "description": "When true, a request is being made and the skeleton state is shown"
+              "privacy": "protected",
+              "description": "When true, a request is being made and the skeleton state is shown",
+              "default": "true"
             },
             {
               "kind": "field",
-              "name": "error",
+              "name": "_error",
               "type": {
                 "text": "boolean | undefined"
               },
-              "default": "false",
-              "description": "true when there is an error"
+              "privacy": "protected",
+              "description": "true when there is an error",
+              "default": "false"
             },
             {
               "kind": "field",
-              "name": "weekDayName",
+              "name": "_weekDayName",
               "type": {
                 "text": "string | undefined"
               },
+              "privacy": "protected",
               "description": "The day of the week"
             },
             {
               "kind": "field",
-              "name": "time",
+              "name": "_time",
               "type": {
                 "text": "string | undefined"
               },
+              "privacy": "protected",
               "description": "The current time"
             },
             {
               "kind": "field",
-              "name": "forecast",
+              "name": "_forecast",
               "type": {
-                "text": "Forecast | undefined"
+                "text": "{\n    weekDayName: string;\n    high: number;\n    low: number;\n    weatherImgSrc: string;\n  }[] | undefined"
               },
-              "default": "[]",
-              "description": "The forecast data"
+              "privacy": "protected",
+              "description": "The forecast data",
+              "default": "[]"
             },
             {
               "kind": "field",
-              "name": "data",
+              "name": "_data",
               "type": {
-                "text": "Data | undefined"
+                "text": "{\n    name?: string;\n    id?: number;\n    sunrise?: string;\n    sunset?: string;\n    temp?: number;\n    description?: string;\n    humidity?: string;\n    wind?: string;\n    weatherImgSrc?: string;\n    fullForecastUrl?: string;\n    tempFeelsLike?: number;\n  }"
               },
-              "default": "{}",
-              "description": "API response for the current weather"
+              "privacy": "protected",
+              "description": "API response for the current weather",
+              "default": "{}"
+            },
+            {
+              "kind": "field",
+              "name": "_cn",
+              "privacy": "protected",
+              "default": "{\n  wrapper: 'block',\n  location: 'text-2xl font-medium',\n  today: `text-base ${grayTxt}`,\n  description: `text-sm mb-3 capitalize ${grayTxt}`,\n  time: `text-base mb-4 ${grayTxt}`,\n  img: 'h-[70px] w-[70px] mr-3 bg-inherit rounded',\n  'img-loading': 'h-[70px] w-[70px] bg-gray-50 dark:bg-gray-800 mr-3 bg-inherit rounded',\n  'extra-info': `flex-col text-xs ml-6 mt-2 hidden sm:flex ${grayTxt}`,\n  'temp-wrapper': 'flex horizontal',\n  'temp-content': 'flex',\n  temp: 'text-7xl',\n  'unit-toggle': `text-lg mt-1.5 ml-2 ${grayTxt}`,\n  'unit-toggle-active': `text-black dark:text-white`,\n  'forecast-wrapper': 'flex flex-wrap gap-6 sm:gap-8 mt-4',\n  'forecast-item': 'flex flex-col items-center',\n  'forecast-item-title': `text-center text-sm font-medium mb-1 ${grayTxt}`,\n  'forecast-item-high': 'text-sm',\n  'forecast-item-low': `text-sm ${grayTxt}`,\n  'forecast-item-img': 'mb-1 bg-inherit',\n  'forecast-item-img-loading': 'h-[48px] w-[48px] rounded-lg bg-gray-50 dark:bg-gray-800',\n  error: 'text-sm',\n  'preview-wrapper': 'flex items-center',\n  'preview-img': 'h-6 w-6 mr-2 bg-inherit rounded',\n  'preview-img-loading': 'h-6 w-6 bg-gray-50 dark:bg-gray-800 rounded-xl',\n  'preview-temp': 'text-lg',\n  'preview-temp-content': 'flex',\n  'preview-unit-toggle': `text-xs mt-0.5 ml-1 ${grayTxt}`,\n}",
+              "description": "Applied classnames",
+              "type": {
+                "text": "object"
+              }
             },
             {
               "kind": "method",
@@ -180,10 +204,16 @@
               "name": "_generateRequests",
               "parameters": [
                 {
-                  "name": "key"
+                  "name": "key",
+                  "type": {
+                    "text": "typeof this.token"
+                  }
                 },
                 {
-                  "name": "query"
+                  "name": "query",
+                  "type": {
+                    "text": "typeof this.query"
+                  }
                 }
               ]
             },
@@ -192,7 +222,10 @@
               "name": "_getLocationParam",
               "parameters": [
                 {
-                  "name": "query"
+                  "name": "query",
+                  "type": {
+                    "text": "string"
+                  }
                 }
               ]
             },
@@ -201,10 +234,16 @@
               "name": "_getCurrentWeather",
               "parameters": [
                 {
-                  "name": "key"
+                  "name": "key",
+                  "type": {
+                    "text": "string"
+                  }
                 },
                 {
-                  "name": "locationParam"
+                  "name": "locationParam",
+                  "type": {
+                    "text": "string"
+                  }
                 }
               ]
             },
@@ -213,28 +252,32 @@
               "name": "_getForecast",
               "parameters": [
                 {
-                  "name": "key"
+                  "name": "key",
+                  "type": {
+                    "text": "string"
+                  }
                 },
                 {
-                  "name": "locationParam"
+                  "name": "locationParam",
+                  "type": {
+                    "text": "string"
+                  }
                 }
               ]
             },
             {
               "kind": "method",
-              "name": "_handleWeatherError",
-              "parameters": [
-                {
-                  "name": "err"
-                }
-              ]
+              "name": "_handleWeatherError"
             },
             {
               "kind": "method",
               "name": "_computeForecast",
               "parameters": [
                 {
-                  "name": "items"
+                  "name": "items",
+                  "type": {
+                    "text": "any"
+                  }
                 }
               ]
             },
@@ -243,7 +286,10 @@
               "name": "_imgSrc",
               "parameters": [
                 {
-                  "name": "{ icon, id, dynamicDayOrNightString = false }"
+                  "name": "{\n    icon,\n    id,\n    dynamicDayOrNightString = false,\n  }",
+                  "type": {
+                    "text": "{\n    icon: string;\n    id: number;\n    dynamicDayOrNightString?: boolean;\n  }"
+                  }
                 }
               ]
             }

@@ -1,0 +1,6 @@
+/** @type {import("eslint").Linter.Config} */
+{
+  "extends": ["plugin:@typescript-eslint/recommended"],
+  "rules": {},
+  "reportUnusedDisableDirectives": true
+}

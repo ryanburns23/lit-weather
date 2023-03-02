@@ -2,27 +2,6 @@ import { LitElement, html, css } from 'lit';
 import '../lit-weather';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
-let typesDefData = `type Data = {
-  name?: string;
-  id?: number;
-  sunrise?: string;
-  sunset?: string;
-  temp?: number;
-  description?: string;
-  humidity?: string;
-  wind?: string;
-  weatherImgSrc?: string;
-  fullForecastUrl?: string;
-  tempFeelsLike?: number;
-}`;
-
-let typesDefForecast = `type Forecast = {
-  weekDayName: string;
-  high: number;
-  low: number;
-  weatherImgSrc: string;
-}[]`;
-
 const defaultTabClassName = /*tw*/ 'rounded-md px-3 py-2 text-sm font-medium';
 const activeTabClassName =
   /*tw*/ 'bg-gray-50/50 dark:bg-white/10 dark:text-white text-black rounded-md px-3 py-2 text-sm font-medium';
@@ -40,7 +19,7 @@ class DemoElement extends LitElement {
         }
       </style>
 
-      <div class="max-w-2xl mx-auto">
+      <div class=${`${this.variant === 'horizontal' ? 'max-w-2xl w-full' : 'max-w-xl'} mx-auto`}>
         <div class="gap-x-4 mb-10">
           <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">lit-weather</h2>
           <p class="mx-auto mt-6 text-lg leading-8 dark:text-gray-300 text-gray-600">
@@ -61,7 +40,6 @@ class DemoElement extends LitElement {
             id="santa-barbara"
             @click="${() => {
               this.value = 'Santa Barbara';
-              this.refresh();
             }}"
             class="${this.value === 'Santa Barbara' ? activeTabClassName : defaultTabClassName}"
           >
@@ -71,7 +49,6 @@ class DemoElement extends LitElement {
             id="sydney"
             @click="${() => {
               this.value = 'Sydney, Australia';
-              this.refresh();
             }}"
             class="${this.value === 'Sydney, Australia' ? activeTabClassName : defaultTabClassName}"
           >
@@ -81,7 +58,6 @@ class DemoElement extends LitElement {
             id="90210"
             @click="${() => {
               this.value = '90210';
-              this.refresh();
             }}"
             class="${this.value === '90210' ? activeTabClassName : defaultTabClassName}"
           >
@@ -91,7 +67,6 @@ class DemoElement extends LitElement {
             id="california"
             @click="${() => {
               this.value = 'California';
-              this.refresh();
             }}"
             class="${this.value === 'California' ? activeTabClassName : defaultTabClassName}"
           >
@@ -102,10 +77,36 @@ class DemoElement extends LitElement {
         <lit-weather
           class="block"
           .query="${this.value}"
+          .variant="${this.variant}"
           token="1e366c8dec8ecdfd589dd13d8aa454e2"
         ></lit-weather>
 
-        <div class="mt-24">
+        <nav
+          class="inline-flex mt-10 items-center justify-center bg-white rounded-md bg-gray-200/50 dark:bg-white/5 p-1 mb-10 text-gray-700 dark:text-gray-300"
+        >
+          <button
+            id="stacked"
+            @click="${() => {
+              this.variant = 'stacked';
+            }}"
+            class="${!this.variant || this.variant === 'stacked'
+              ? activeTabClassName
+              : defaultTabClassName}"
+          >
+            Stacked
+          </button>
+          <button
+            id="preview"
+            @click="${() => {
+              this.variant = 'preview';
+            }}"
+            class="${this.variant === 'preview' ? activeTabClassName : defaultTabClassName}"
+          >
+            Preview
+          </button>
+        </nav>
+
+        <div class="mt-16">
           <h2 class="text-3xl mb-5">Properties</h2>
           <div class="my-6">
             <ul
@@ -198,6 +199,8 @@ class DemoElement extends LitElement {
   static get properties() {
     return {
       value: { type: String },
+      variant: { type: String },
+
       properties: { type: Object },
     };
   }
@@ -207,16 +210,9 @@ class DemoElement extends LitElement {
     this.value = 'Santa Barbara';
     fetch('/custom-elements.json').then(response => {
       response.json().then(json => {
-        this.properties = json.modules[0].declarations[0].members
-          .filter(m => m.kind === 'field' && m.type)
-          .map(m => {
-            const res = m;
-            if (m.name === 'data') res.typeDef = typesDefData;
-            if (m.name === 'forecast') res.typeDef = typesDefForecast;
-
-            return res;
-          });
-        console.log(this.properties);
+        this.properties = json.modules[0].declarations[0].members.filter(
+          m => m.kind === 'field' && m.type && m.privacy !== 'protected'
+        );
       });
     });
   }
