@@ -1,9 +1,10 @@
 {
   "name": "lit-weather",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lit powered weather forecast web component, leveraging the OpenWeatherMap API. It's customizable with tailwindcss, lightweight, and shadow dom free.",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/lit-weather.js",
+  "module": "dist/lit-weather.js",
+  "types": "dist/lit-weather.d.ts",
   "type": "module",
   "author": "ryanburns23",
   "license": "MIT",
@@ -15,17 +16,6 @@
     "icons",
     "custom-elements.json"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./lit-weather": {
-      "import": "./dist/lit-weather.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./customElements": "./custom-elements.json"
-  },
   "scripts": {
     "start": "web-dev-server --open demo/ --node-resolve",
     "start:watch": "web-dev-server --open demo/ --node-resolve --watch",

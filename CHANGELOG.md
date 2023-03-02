@@ -1,3 +1,7 @@
+## 1.0.1 (2023-03-02)
+
+- add package.json main export, remove exports object
+
 ## 1.0.0 (2023-03-02)
 
 - Enable strict mode
