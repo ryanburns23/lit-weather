@@ -245,7 +245,7 @@ export class LitWeather extends LitElement {
     this.units = 'Imperial';
     this.variant = 'stacked';
     this.cn = defaultCn;
-    this.iconBaseUrl = 'https://www.unpkg.com/lit-weather/icons/';
+    this.iconBaseUrl = 'https://www.unpkg.com/lit-weather/icons';
     this._loading = true;
     this._data = {};
     this._forecast = [];

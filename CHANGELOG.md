@@ -1,3 +1,7 @@
+## 1.0.2 (2025-05-21)
+
+- Fix default iconBaseUrl
+
 ## 1.0.1 (2023-03-02)
 
 - add package.json main export, remove exports object
